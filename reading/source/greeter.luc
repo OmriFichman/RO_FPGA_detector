@@ -1,0 +1,237 @@
+module greeter ( // 2 RO with seperate RAMs outside diff !!! Fichman TM
+    input clk,         // clock
+    input rst,         // reset
+    input new_rx,      // new RX flag
+    input rx_data[8],  // RX data
+    output new_tx,     // new TX flag
+    output tx_data[8], // TX data
+    input tx_busy,      // TX is busy flag
+    output tj[8]
+  ) {
+  
+  // ******** DEFINES - INSIDE MODULES ********
+  
+  const PROMPT_TEXT = $reverse("\r\nAny = no troj; h = mid, Ent = with");
+  
+  .clk(clk) {
+    .rst(rst) {
+      fsm state = {IDLE, PROMPT, LISTEN, SAMPLING, TRANSMITTING}; // our state machine
+      fsm state2 = {RST, WAIT, WRITE}; // sampling state machine
+      fsm state3 = {READ, T_NUM1, T_NUM2, T_NUM3}; // printing state machine
+    }
+    
+    dff prompt_count[$clog2(PROMPT_TEXT.WIDTH[0])];
+    
+    dff name_count[11]; // need to cover address space of RAM. was 8
+    dff waiting[8];
+    //dff waiting2[32];
+    dff county[8];
+    dff tmp[24];
+    dff dikoy[8]; //reading the troj output in order to not fall in synthesis optimization
+    dff trj;
+    dff sn1;
+    dff sn2;
+    dff sn1_rst;
+    dff sn2_rst;
+    dff who;
+    //dff double;
+    
+    simple_ram ram (#SIZE(24), #DEPTH(2000)); // was 200 alone before two long transmitting
+    simple_ram ram2 (#SIZE(24), #DEPTH(2000));
+    
+    
+  }
+    
+    // ***********************
+  
+    // ******** DEFINES - OUTSIDE MODULES ********
+  
+    sensor sen;
+    //trojan tr;
+    noise ns(.clk(clk), .rst(rst)); // NOISE CHANGE
+    //trojan tr2;
+  
+    mem_quick cache;
+    //dff uno[24](.clk(sen.out), .rst(sn1_rst.q)); // CHACHE CHANGE
+    //dff dos[24](.clk(sen.out2), .rst(sn2_rst.q));
+    
+    // ***********************
+  
+  
+  always {
+    
+    // ******** CACHE ********
+    
+    cache.rst_uno = sn1_rst.q;
+    cache.rst_dos = sn2_rst.q;
+    cache.clk_uno = sen.out;
+    cache.clk_dos = sen.out2;
+    
+    // ***********************
+    
+    // ********* RAM *********
+    
+    ram.address = name_count.q;
+    ram.write_data = cache.out_uno; //uno.q;  // CHACHE CHANGE    
+    ram.write_en = 0;
+    ram2.address = name_count.q;
+    ram2.write_data = cache.out_dos; //dos.q;  // CHACHE CHANGE
+    ram2.write_en = 0; 
+    
+    // *********************** 
+            
+    sen.enb1 = sn1.q;
+    sen.enb2 = sn2.q;
+    sn1_rst.d = 1b0;
+    sn2_rst.d = 1b0;
+    
+    //uno.d = uno.q + 1; // CHACHE CHANGE
+    //dos.d = dos.q + 1; // CHACHE CHANGE
+    
+    //tr.enb = trj.q;
+    ns.enb = trj.q; //NOISE CHANGE
+    tj = dikoy.q;
+    
+    new_tx = 0;
+    tx_data = 8hxx;
+    
+    case (state.q) { 
+
+      state.IDLE:
+        prompt_count.d = 0;
+        trj.d = 0;
+        if (new_rx){
+          state.d = state.PROMPT;
+          county.d = 0;
+        }
+      
+      state.PROMPT:
+        if (!tx_busy) {
+          prompt_count.d = prompt_count.q + 1;
+          new_tx = 1;
+          tx_data = PROMPT_TEXT[prompt_count.q];
+          if (prompt_count.q == PROMPT_TEXT.WIDTH[0] - 1){
+            state.d = state.LISTEN;
+          }
+        }
+      
+      state.LISTEN:
+        if (new_rx) {
+          if (rx_data == "\n" || rx_data == "\r" || rx_data =="h") {
+            //if (rx_data == "h"){
+            //  evil.d = 1;
+            //}
+            trj.d = 1;
+          }
+          state.d = state.SAMPLING;
+          sn1.d = 1;
+          sn2.d = 1;
+          who.d = 0; //transmitting indicator for RAM to serial
+          //double.d = 0; //take only second samp - doubling the samp for longer time and rst the counter
+          //waiting.d = 0;
+          state2.d = state2.RST;
+          name_count.d = 11d0000;
+        }
+      
+      
+      state.SAMPLING:
+        case (state2.q) {
+          state2.RST:
+            name_count.d = name_count.q + 1;
+            sn1_rst.d = 1b1;
+            sn2_rst.d = 1b1;
+            state2.d = state2.WAIT;
+          
+          state2.WAIT:
+            //state2.d = state2.WRITE;
+            if(waiting.q[2] == 1){
+              waiting.d = 0;
+              /*if(double.q == 1) //Take only second samp - for longer time and rst the counter
+              {
+                state2.d = state2.N;
+                double.d = 0;
+              }
+              else
+              {
+                state2.d = state2.RST;
+                double.d = 1;
+              }*/
+              state2.d = state2.WRITE;
+            }
+            else
+              waiting.d = waiting.q + 1;
+            
+          state2.WRITE:
+            ram.write_en = 1b1;
+            ram2.write_en = 1b1;
+            state2.d = state2.RST;
+            if(name_count.q >= 11d1999){
+              state.d = state.TRANSMITTING;
+              state3.d = state3.READ;
+              //sn1.d = 0; //NEW SYNC EACH CYCLE- LOOKING FOR A TRAIN
+              //sn2.d = 0;
+              name_count.d = 11d0001;
+              //waiting2.d = 0;
+            }
+        }
+        
+      state.TRANSMITTING:
+        if (!tx_busy) { 
+          if(name_count.q < 11d2000){
+            case (state3.q) {
+              state3.READ:
+                if(who.q == 0)
+                  tmp.d = ram.read_data;
+                else
+                  tmp.d = ram2.read_data;
+                state3.d = state3.T_NUM1;
+              
+              state3.T_NUM1:
+                new_tx = 1;
+                tx_data = tmp.q[23:16];
+                state3.d = state3.T_NUM2;
+                
+              state3.T_NUM2:
+                new_tx = 1;
+                tx_data = tmp.q[15:8];
+                state3.d = state3.T_NUM3;
+                
+              state3.T_NUM3:
+                new_tx = 1;
+                tx_data = tmp.q[7:0];
+                state3.d = state3.READ;
+                if(who.q == 0)
+                  who.d = 1;
+                else
+                {
+                  name_count.d = name_count.q + 1;
+                  who.d = 0;
+                }
+              }
+          }
+          else{
+            if(county.q < 8d10){ // How many times to repeat. total samples = county * name_count. was 100
+              //if(waiting2.q[23] == 1){ //INCREAS WAITING TIME EACH WINDOW
+                county.d = county.q + 1;
+                name_count.d = 11d0000;
+                //dikoy.d = tr.out_troj; 
+                dikoy.d = ns.out_troj; //NOISE CHANGE
+                state.d = state.SAMPLING;
+                //sn1.d = 1; //NEW SYNC EACH CYCLE- LOOKING FOR A TRAIN
+                //sn2.d = 1;
+              //  waiting2.d = 0;
+              //}
+              //else
+              //  waiting2.d = waiting2.q + 1;
+            }
+            else{
+              sn1.d = 0;
+              sn2.d = 0;
+              trj.d = 0;
+              state.d = state.IDLE;
+            }
+          } 
+        }
+    }
+  }
+}

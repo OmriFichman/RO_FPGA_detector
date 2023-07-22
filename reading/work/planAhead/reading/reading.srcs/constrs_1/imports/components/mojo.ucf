@@ -1,0 +1,70 @@
+INST "greeter/ram" AREA_GROUP = "pblock_ram";
+AREA_GROUP "pblock_ram" RANGE=SLICE_X2Y48:SLICE_X21Y61;
+AREA_GROUP "pblock_ram" RANGE=DSP48_X0Y12:DSP48_X0Y14;
+AREA_GROUP "pblock_ram" RANGE=RAMB16_X0Y24:RAMB16_X1Y28;
+AREA_GROUP "pblock_ram" RANGE=RAMB8_X0Y24:RAMB8_X1Y29;
+INST "greeter/ram2" AREA_GROUP = "pblock_ram2";
+AREA_GROUP "pblock_ram2" RANGE=SLICE_X2Y48:SLICE_X21Y61;
+AREA_GROUP "pblock_ram2" RANGE=DSP48_X0Y12:DSP48_X0Y14;
+AREA_GROUP "pblock_ram2" RANGE=RAMB16_X0Y24:RAMB16_X1Y28;
+AREA_GROUP "pblock_ram2" RANGE=RAMB8_X0Y24:RAMB8_X1Y29;
+INST "greeter/cache" AREA_GROUP = "pblock_cache";
+AREA_GROUP "pblock_cache" RANGE=SLICE_X4Y48:SLICE_X19Y60;
+AREA_GROUP "pblock_cache" RANGE=DSP48_X0Y12:DSP48_X0Y14;
+CONFIG VCCAUX  = 3.3;
+
+NET "clk" TNM_NET = "clk";
+TIMESPEC TS_clk = PERIOD "clk" 50 MHz HIGH 50 %;
+
+NET "clk" LOC = P56;
+NET "clk" IOSTANDARD = LVTTL;
+NET "rst_n" LOC = P38;
+NET "rst_n" IOSTANDARD = LVTTL;
+
+NET "cclk" LOC = P70;
+NET "cclk" IOSTANDARD = LVTTL;
+
+NET "led[0]" LOC = P134;
+NET "led[0]" IOSTANDARD = LVTTL;
+NET "led[1]" LOC = P133;
+NET "led[1]" IOSTANDARD = LVTTL;
+NET "led[2]" LOC = P132;
+NET "led[2]" IOSTANDARD = LVTTL;
+NET "led[3]" LOC = P131;
+NET "led[3]" IOSTANDARD = LVTTL;
+NET "led[4]" LOC = P127;
+NET "led[4]" IOSTANDARD = LVTTL;
+NET "led[5]" LOC = P126;
+NET "led[5]" IOSTANDARD = LVTTL;
+NET "led[6]" LOC = P124;
+NET "led[6]" IOSTANDARD = LVTTL;
+NET "led[7]" LOC = P123;
+NET "led[7]" IOSTANDARD = LVTTL;
+
+NET "spi_mosi" LOC = P44;
+NET "spi_mosi" IOSTANDARD = LVTTL;
+NET "spi_miso" LOC = P45;
+NET "spi_miso" IOSTANDARD = LVTTL;
+NET "spi_ss" LOC = P48;
+NET "spi_ss" IOSTANDARD = LVTTL;
+NET "spi_sck" LOC = P43;
+NET "spi_sck" IOSTANDARD = LVTTL;
+NET "spi_channel[0]" LOC = P46;
+NET "spi_channel[0]" IOSTANDARD = LVTTL;
+NET "spi_channel[1]" LOC = P61;
+NET "spi_channel[1]" IOSTANDARD = LVTTL;
+NET "spi_channel[2]" LOC = P62;
+NET "spi_channel[2]" IOSTANDARD = LVTTL;
+NET "spi_channel[3]" LOC = P65;
+NET "spi_channel[3]" IOSTANDARD = LVTTL;
+
+NET "avr_tx" LOC = P55;
+NET "avr_tx" IOSTANDARD = LVTTL;
+NET "avr_rx" LOC = P59;
+NET "avr_rx" IOSTANDARD = LVTTL;
+NET "avr_rx_busy" LOC = P39;
+NET "avr_rx_busy" IOSTANDARD = LVTTL;
+INST "greeter/sen" AREA_GROUP = "pblock_sen";
+AREA_GROUP "pblock_sen" RANGE=SLICE_X14Y19:SLICE_X15Y19;
+INST "greeter/ns" AREA_GROUP = "pblock_ns";
+AREA_GROUP "pblock_ns" RANGE=SLICE_X14Y16:SLICE_X15Y22;

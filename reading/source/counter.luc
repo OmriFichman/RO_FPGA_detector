@@ -1,0 +1,15 @@
+module counter (
+    input clk,  // clock
+    input rst,  // reset
+    input enable,
+    output out
+  ) {
+
+  dff counter[24](.clk(clk), .rst(rst));
+  
+  always {
+    out = counter.q[23];
+    if(enable == 1b1)
+      counter.d = counter.q + 1;
+  }
+}

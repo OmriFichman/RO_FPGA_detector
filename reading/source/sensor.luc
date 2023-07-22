@@ -1,0 +1,20 @@
+module sensor (
+    //input rst,  // reset
+    input enb1,
+    input enb2,
+    output out,//[24] //NO MEMORY IN MODULE
+    output out2//[24] //NO MEMORY IN MODULE
+  ) {
+
+    .enable(enb1){
+      ro ro1;
+    }
+    .enable(enb2){
+      ro ro11;
+    }
+  
+  always {
+    out = ro1.out;
+    out2 = ro11.out;
+  }
+}

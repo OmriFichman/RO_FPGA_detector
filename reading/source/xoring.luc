@@ -1,0 +1,14 @@
+module xoring (
+    input enb,
+    output out
+  ) {
+
+  just_ro uno;
+  just_ro dos;
+  
+  always {
+    uno.enable = enb;
+    dos.enable = enb;
+    out = uno.out ^ dos.out;
+  }
+}

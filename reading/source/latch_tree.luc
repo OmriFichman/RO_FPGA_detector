@@ -1,0 +1,60 @@
+module latch_tree (
+    input rst,  // reset
+    input d,
+    output out[15]
+  ) {
+
+  .rst(rst) {
+    d_latch latch1;
+    d_latch latch21;
+    d_latch latch22;
+    d_latch latch31;
+    d_latch latch32;
+    d_latch latch33;
+    d_latch latch34;
+    d_latch latch41;
+    d_latch latch42;
+    d_latch latch43;
+    d_latch latch44;
+    d_latch latch45;
+    d_latch latch46;
+    d_latch latch47;
+    d_latch latch48;
+  }
+  
+  always {
+    latch1.d = d;
+    out[0] = latch1.q;
+    
+    latch21.d = latch1.q;
+    out[1] = latch21.q;
+    latch22.d = latch1.q;
+    out[2] = latch22.q;
+    
+    latch31.d = latch21.q;
+    out[3] = latch31.q;
+    latch32.d = latch21.q;
+    out[4] = latch32.q;
+    latch33.d = latch22.q;
+    out[5] = latch33.q;
+    latch34.d = latch22.q;
+    out[6] = latch34.q;
+    
+    latch41.d = latch31.q;
+    out[7] = latch41.q;
+    latch42.d = latch31.q;
+    out[8] = latch42.q;
+    latch43.d = latch32.q;
+    out[9] = latch43.q;
+    latch44.d = latch32.q;
+    out[10] = latch44.q;
+    latch45.d = latch33.q;
+    out[11] = latch45.q;
+    latch46.d = latch33.q;
+    out[12] = latch46.q;
+    latch47.d = latch34.q;
+    out[13] = latch47.q;
+    latch48.d = latch34.q;
+    out[14] = latch48.q;
+  }
+}

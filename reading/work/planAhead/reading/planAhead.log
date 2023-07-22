@@ -1,0 +1,160 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Sat Jan 28 14:01:35 2023
+# Process ID: 284
+# Log file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/planAhead.log
+# Journal file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading\planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Common 17-86] Your PlanAhead license expires in -28 day(s)
+INFO: [Device 21-36] Loading parts and site information from C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+open_project {C:\Users\Omri Fichman\Documents\alchitry\reading\work\planAhead\reading\reading.ppr}
+Scanning sources...
+Finished scanning sources
+Qt: Untested Windows version 6.2 detected!
+update_compile_order -fileset sim_1
+open_run synth_1 -name netlist_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc6slx9tqg144-2
+Parsing EDIF File [./reading.data/cache/mojo_top_0_ngc_zx.edif]
+Finished Parsing EDIF File [./reading.data/cache/mojo_top_0_ngc_zx.edif]
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Loading clock regions from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/ClockRegion.xml
+Loading clock buffers from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/ClockBuffers.xml
+Loading package pin functions from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/PinFunctions.xml...
+Loading package from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/spartan6lx/xc6slx9/tqg144/Package.xml
+Loading io standards from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/IOStandards.xml
+Loading device configuration modes from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan6/ConfigModes.xml
+Loading list of drcs for the architecture : C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan6/drc.xml
+Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.srcs/constrs_1/imports/components/mojo.ucf]
+Finished Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.srcs/constrs_1/imports/components/mojo.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 9 instances were transformed.
+  BUFGP => BUFGP (IBUF, BUFG): 1 instances
+  INV => LUT1: 7 instances
+  SRLC16E => SRL16E: 1 instances
+
+Phase 0 | Netlist Checksum: a98d320f
+open_run: Time (s): elapsed = 00:00:08 . Memory (MB): peak = 662.020 ; gain = 194.453
+startgroup
+create_pblock pblock_ram
+resize_pblock pblock_ram -add {SLICE_X2Y48:SLICE_X21Y61 DSP48_X0Y12:DSP48_X0Y14 RAMB16_X0Y24:RAMB16_X1Y28 RAMB8_X0Y24:RAMB8_X1Y29}
+add_cells_to_pblock pblock_ram [get_cells [list greeter/ram]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ram2
+resize_pblock pblock_ram2 -add {SLICE_X2Y48:SLICE_X21Y61 DSP48_X0Y12:DSP48_X0Y14 RAMB16_X0Y24:RAMB16_X1Y28 RAMB8_X0Y24:RAMB8_X1Y29}
+add_cells_to_pblock pblock_ram2 [get_cells [list greeter/ram2]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_sen
+resize_pblock pblock_sen -add SLICE_X16Y20:SLICE_X17Y20
+add_cells_to_pblock pblock_sen [get_cells [list greeter/sen]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X14Y18:SLICE_X19Y22
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+save_constraints
+INFO: [Project 1-96] Target constrs file set to 'C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.srcs/constrs_1/imports/components/mojo.ucf' for the 'constrs_1' constraints set.
+reset_run impl_1
+launch_runs impl_1
+[Sat Jan 28 14:03:13 2023] Launched impl_1...
+Run output will be captured here: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/runme.log
+launch_runs impl_1 -to_step Bitgen
+[Sat Jan 28 14:03:44 2023] Launched impl_1...
+Run output will be captured here: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/runme.log
+open_run impl_1
+Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+Finished Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+Finished Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+INFO: [Designutils 20-669] Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+WARNING: [Designutils 20-665] Net Name: spi_mosi. Found in file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl. Not Recognizable in the Context
+INFO: [Designutils 20-658] Finished Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+INFO: [Designutils 20-671] Placed 643 instances
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  BUFGP => BUFGP (IBUF, BUFG): 1 instances
+
+Phase 0 | Netlist Checksum: c74ccc6d
+current_design netlist_1
+delete_pblock [get_pblocks  pblock_ns]
+delete_pblock [get_pblocks  pblock_sen]
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X12Y40:SLICE_X19Y45
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_cache
+resize_pblock pblock_cache -add {SLICE_X4Y48:SLICE_X19Y60 DSP48_X0Y12:DSP48_X0Y14}
+add_cells_to_pblock pblock_cache [get_cells [list greeter/cache]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ro1
+resize_pblock pblock_ro1 -add SLICE_X14Y16:SLICE_X15Y16
+add_cells_to_pblock pblock_ro1 [get_cells [list greeter/sen/ro1]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ro11
+resize_pblock pblock_ro11 -add SLICE_X14Y20:SLICE_X15Y20
+add_cells_to_pblock pblock_ro11 [get_cells [list greeter/sen/ro11]] -clear_locs
+endgroup
+save_constraints
+reset_run impl_1
+launch_runs impl_1
+[Sat Jan 28 14:31:52 2023] Launched impl_1...
+Run output will be captured here: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/runme.log
+current_design impl_1
+refresh_design
+Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+Finished Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+Finished Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+INFO: [Designutils 20-669] Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+WARNING: [Designutils 20-665] Net Name: spi_mosi. Found in file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl. Not Recognizable in the Context
+INFO: [Designutils 20-658] Finished Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+INFO: [Designutils 20-671] Placed 643 instances
+current_design netlist_1
+delete_pblock [get_pblocks  pblock_ns]
+delete_pblock [get_pblocks  pblock_ro11]
+delete_pblock [get_pblocks  pblock_ro1]
+startgroup
+create_pblock pblock_sen
+resize_pblock pblock_sen -add SLICE_X14Y19:SLICE_X15Y19
+add_cells_to_pblock pblock_sen [get_cells [list greeter/sen]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X14Y16:SLICE_X15Y22
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+save_constraints
+reset_run impl_1
+launch_runs impl_1
+[Sat Jan 28 14:50:37 2023] Launched impl_1...
+Run output will be captured here: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/runme.log
+current_design impl_1
+refresh_design
+Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+Finished Parsing EDIF File [./reading.runs/impl_1/mojo_top_0.edf]
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+Finished Parsing UCF File [C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/.constrs/mojo.ucf]
+INFO: [Designutils 20-669] Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+WARNING: [Designutils 20-665] Net Name: spi_mosi. Found in file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl. Not Recognizable in the Context
+INFO: [Designutils 20-658] Finished Parsing Placement File : C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/reading.runs/impl_1/mojo_top_0_routed.xdl
+INFO: [Designutils 20-671] Placed 643 instances

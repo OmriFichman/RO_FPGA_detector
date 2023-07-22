@@ -1,0 +1,23 @@
+module enb_spliter (
+    input enb,
+    output enb1,
+    output enb2,
+    output enb3,
+    output enb4,
+    output enb5,
+    output enb6,
+    output enb7,
+    output enb8
+  ) {
+
+  always {
+    enb1 = enb;
+    enb2 = enb;
+    enb3 = enb;
+    enb4 = enb;
+    enb5 = enb;
+    enb6 = enb;
+    enb7 = enb;
+    enb8 = enb;
+  }
+}

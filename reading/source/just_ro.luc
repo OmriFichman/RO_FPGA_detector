@@ -1,0 +1,12 @@
+module just_ro (
+    input enable,
+    output out
+  ) {
+
+  sig tmp;
+  
+  always {
+    tmp = ~(tmp & enable);
+    out = tmp;
+  }
+}

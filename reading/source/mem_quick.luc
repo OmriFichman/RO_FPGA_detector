@@ -1,0 +1,19 @@
+module mem_quick (
+    input clk_uno,  // clock
+    input clk_dos,
+    input rst_uno,  // reset
+    input rst_dos,
+    output out_uno[24],
+    output out_dos[24]
+  ) {
+
+  dff uno[24](.clk(clk_uno), .rst(rst_uno));
+  dff dos[24](.clk(clk_dos), .rst(rst_dos));
+  
+  always {
+    out_uno = uno.q;
+    out_dos = dos.q;
+    uno.d = uno.q + 1;
+    dos.d = dos.q + 1;
+  }
+}

@@ -1,0 +1,15 @@
+module ro (
+    //input rst,    // reset
+    input enable,
+    output out//[24]
+  ) {
+ 
+  sig tmp;
+  //dff counter[24](.clk(tmp), .rst(rst));
+ 
+  always {
+    tmp = ~(tmp & enable);
+    out = tmp;//counter.q[23:0];
+    //counter.d = counter.q + 1;
+  }
+}

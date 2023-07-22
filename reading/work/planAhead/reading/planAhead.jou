@@ -1,0 +1,88 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Sat Jan 28 14:01:35 2023
+# Process ID: 284
+# Log file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading/planAhead.log
+# Journal file: C:/Users/Omri Fichman/Documents/alchitry/reading/work/planAhead/reading\planAhead.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:\Users\Omri Fichman\Documents\alchitry\reading\work\planAhead\reading\reading.ppr}
+update_compile_order -fileset sim_1
+open_run synth_1 -name netlist_1
+startgroup
+create_pblock pblock_ram
+resize_pblock pblock_ram -add {SLICE_X2Y48:SLICE_X21Y61 DSP48_X0Y12:DSP48_X0Y14 RAMB16_X0Y24:RAMB16_X1Y28 RAMB8_X0Y24:RAMB8_X1Y29}
+add_cells_to_pblock pblock_ram [get_cells [list greeter/ram]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ram2
+resize_pblock pblock_ram2 -add {SLICE_X2Y48:SLICE_X21Y61 DSP48_X0Y12:DSP48_X0Y14 RAMB16_X0Y24:RAMB16_X1Y28 RAMB8_X0Y24:RAMB8_X1Y29}
+add_cells_to_pblock pblock_ram2 [get_cells [list greeter/ram2]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_sen
+resize_pblock pblock_sen -add SLICE_X16Y20:SLICE_X17Y20
+add_cells_to_pblock pblock_sen [get_cells [list greeter/sen]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X14Y18:SLICE_X19Y22
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+save_constraints
+reset_run impl_1
+launch_runs impl_1
+wait_on_run impl_1
+launch_runs impl_1 -to_step Bitgen
+wait_on_run impl_1
+open_run impl_1
+current_design netlist_1
+delete_pblock [get_pblocks  pblock_ns]
+delete_pblock [get_pblocks  pblock_sen]
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X12Y40:SLICE_X19Y45
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_cache
+resize_pblock pblock_cache -add {SLICE_X4Y48:SLICE_X19Y60 DSP48_X0Y12:DSP48_X0Y14}
+add_cells_to_pblock pblock_cache [get_cells [list greeter/cache]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ro1
+resize_pblock pblock_ro1 -add SLICE_X14Y16:SLICE_X15Y16
+add_cells_to_pblock pblock_ro1 [get_cells [list greeter/sen/ro1]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ro11
+resize_pblock pblock_ro11 -add SLICE_X14Y20:SLICE_X15Y20
+add_cells_to_pblock pblock_ro11 [get_cells [list greeter/sen/ro11]] -clear_locs
+endgroup
+save_constraints
+reset_run impl_1
+launch_runs impl_1
+wait_on_run impl_1
+current_design impl_1
+refresh_design
+current_design netlist_1
+delete_pblock [get_pblocks  pblock_ns]
+delete_pblock [get_pblocks  pblock_ro11]
+delete_pblock [get_pblocks  pblock_ro1]
+startgroup
+create_pblock pblock_sen
+resize_pblock pblock_sen -add SLICE_X14Y19:SLICE_X15Y19
+add_cells_to_pblock pblock_sen [get_cells [list greeter/sen]] -clear_locs
+endgroup
+startgroup
+create_pblock pblock_ns
+resize_pblock pblock_ns -add SLICE_X14Y16:SLICE_X15Y22
+add_cells_to_pblock pblock_ns [get_cells [list greeter/ns]] -clear_locs
+endgroup
+save_constraints
+reset_run impl_1
+launch_runs impl_1
+wait_on_run impl_1
+current_design impl_1
+refresh_design

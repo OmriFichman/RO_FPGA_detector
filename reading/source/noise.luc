@@ -1,0 +1,43 @@
+module noise (
+    input clk,  // clock
+    input rst,  // reset
+    input enb,
+    output out_troj[8]
+  ) {
+
+  .clk(clk){
+      .rst(rst) {
+          counter ro2;
+          counter ro3;
+          counter ro4;
+          counter ro5;
+          counter ro6;
+          counter ro7;
+          counter ro8;
+          counter ro9;
+      
+    }
+  }
+  
+  enb_spliter spliter;
+  
+  always {
+    spliter.enb = enb;
+    ro2.enable = spliter.enb1;
+    ro3.enable = spliter.enb2;
+    ro4.enable = spliter.enb3;
+    ro5.enable = spliter.enb4;
+    ro6.enable = spliter.enb5;
+    ro7.enable = spliter.enb6;
+    ro8.enable = spliter.enb7;
+    ro9.enable = spliter.enb8;
+    out_troj[0] = ro2.out;
+    out_troj[1] = ro3.out;
+    out_troj[2] = ro4.out;
+    out_troj[3] = ro5.out;
+    out_troj[4] = ro6.out;
+    out_troj[5] = ro7.out;
+    out_troj[6] = ro8.out;
+    out_troj[7] = ro9.out;
+  }
+}
